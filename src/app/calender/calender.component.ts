@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { Calendar, CalendarOptions } from '@fullcalendar/core';
+import { Calendar, CalendarOptions, EventInputTransformer, EventSourceInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
@@ -24,24 +24,23 @@ import { EventServiceService } from '../event-service.service';
   styleUrl: './calender.component.css',
 })
 export class CalenderComponent {
-  events: EventData[] = [];
+  events: EventSourceInput[] = [];
   eventService: EventServiceService = inject(EventServiceService);
 
-  // constructor() {
-  //   var calendarEl = document.getElementById('calendar');
-  //   var calendar = new FullCalendar.Calendar(calendarEl, {
-  //     plugins: [dayGridPlugin],
-  //     // options here
-  //   });
-  // }
+  transformEventData: EventInputTransformer = (eventInput) => {
+    return {
+      title: eventInput.title?.toUpperCase(),
+      start: eventInput['startTime'],
+      end: eventInput['endTime'],
+    };
+  };
 
   calenderOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
-    initialEvents: [{
-      id: 'createEventId()',
-      title: 'Timed event',
-      start: '20240512T12:00:00',
-    }],
+    initialEvents: {
+      url: 'http://localhost:8080/event/all',
+    },
+    eventDataTransform: this.transformEventData,
   };
 }

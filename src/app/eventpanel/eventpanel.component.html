@@ -9,9 +9,10 @@
 
   <ul>
     @for (event of filteredEvents; track $index) {
+        
     <li>
-      {{ event.title }}
-      <div class="hover-box">
+      {{ event}}
+      <!-- <div class="hover-box">
        <table>
         <tr>
             <td>Title:</td>
@@ -30,7 +31,7 @@
             <td>{{event.endTime}}</td>
         </tr>
        </table>
-    </div>
+    </div> -->
     </li>
     }
   </ul>

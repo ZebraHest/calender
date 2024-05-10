@@ -10,9 +10,11 @@ export class EventServiceService {
 
   constructor() {}
 
-  async getAllEvents(): Promise<EventData[]> {
+  async getAllEvents(): Promise<EventSourceInput[]> {
     const data = await fetch(this.url.concat('/all'));
-    return (await data.json()) ?? [];
+    const da = await data.json();
+    console.log(da);
+    return (da) ?? [];
   }
 
   async getEventById(id: number): Promise<EventData[]> {
