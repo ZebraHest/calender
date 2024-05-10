@@ -1,0 +1,24 @@
+/* Style for the box */
+.hover-box {
+    display: none;
+    /* Initially hide the box */
+    position: absolute;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* Style for list items */
+li {
+    position: relative;
+    /* Make sure the box position is relative to the list item */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+}
+
+/* Show the box when hovering over list item */
+li:hover .hover-box {
+    display: block;
+}
