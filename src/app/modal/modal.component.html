@@ -1,0 +1,48 @@
+<!-- <ng-template #content let-modal> -->
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-3">
+				<input
+						id="title"
+						class="text-input"
+						placeholder="Title"
+						#title
+					/>
+					<br>
+				<label for="startDate">Start Date</label>
+				<div class="input-group">
+					<input
+						#startDate
+						id="startDate"
+						class="form-control"
+						placeholder="yyyy-mm-dd"
+						name="dp"
+						ngbDatepicker
+						#dpstart="ngbDatepicker"
+					/>
+					<button class="btn btn-outline-secondary bi bi-calendar3" (click)="dpstart.toggle()" type="button"></button>
+				</div>
+				<label for="endDate">End Date</label>
+				<div class="input-group">
+					<input
+						#endDate
+						id="endDate"
+						class="form-control"
+						placeholder="yyyy-mm-dd"
+						name="dp"
+						ngbDatepicker
+						#dpend="ngbDatepicker"
+					/>
+					<button class="btn btn-outline-secondary bi bi-calendar3" (click)="dpend.toggle()" type="button"></button>
+				</div>
+				
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="saveandclose([title.value, startDate.value, endDate.value])">Save</button>
+	</div>
