@@ -21,47 +21,61 @@
       />
       <br />
       <label for="startDate">Start Date</label>
-      <div class="input-group">
-        <input
-          #startDate
-          id="startDate"
-          class="form-control"
-          placeholder="yyyy-mm-dd"
-          name="dp"
-          ngbDatepicker
-          #dpstart="ngbDatepicker"
-        />
-        <button
-          class="btn btn-outline-secondary bi bi-calendar3"
-          (click)="dpstart.toggle()"
-          type="button"
-        ></button>
-      </div>
+      <input type="datetime-local" #startDate id="startDate" />
+      <br />
       <label for="endDate">End Date</label>
-      <div class="input-group">
-        <input
-          #endDate
-          id="endDate"
-          class="form-control"
-          placeholder="yyyy-mm-dd"
-          name="dp"
-          ngbDatepicker
-          #dpend="ngbDatepicker"
-        />
-        <button
-          class="btn btn-outline-secondary bi bi-calendar3"
-          (click)="dpend.toggle()"
-          type="button"
-        ></button>
-      </div>
+      <input type="datetime-local" #endDate id="endDate" />
+      <br />
+      <input type="checkbox" id="isFlexible" name="isFlexible" #isFlexible />
+      <label for="isFlexible">Flexible</label>
+      <br />
+      <label for="duration">Duration</label>
       <form id="duration">
-		<input id="d" name="d" type="number" min="0" max="365" />
+        <input id="d" name="d" type="number" min="0" max="365" #days />
         <label for="d">d</label>
-        <input id="h" name="h" type="number" min="0" max="23" />
+        <input id="h" name="h" type="number" min="0" max="23" #hours />
         <label for="h">h</label>
-        <input id="m" name="m" type="number" min="0" max="59" />
+        <input id="m" name="m" type="number" min="0" max="59" #minutes />
         <label for="m">m</label>
       </form>
+      <input type="checkbox" id="isRepeating" name="isRepeating" #isRepeating />
+      <label for="isRepeating">Repeating</label>
+      <br />
+      <label for="startDateRepeat">Repeating Start Date</label>
+      <input type="date" #startDateRepeat id="startDateRepeat" />
+      <br />
+      <label for="endDateRepeat">Repeating End Date</label>
+      <input type="date" #endDateRepeat id="endDateRepeat" />
+      <div class="dowPicker">
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow1" #dow1/>
+          <label for="dow1">M</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow2" #dow2/>
+          <label for="dow2">T</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow3" #dow3/>
+          <label for="dow3">W</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow4" #dow4/>
+          <label for="dow4">T</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow5" #dow5/>
+          <label for="dow5">F</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow6" #dow6/>
+          <label for="dow6">S</label>
+        </div>
+        <div class="dowPickerOption">
+          <input type="checkbox" id="dow7" #dow7/>
+          <label for="dow7">S</label>
+        </div>
+      </div>
     </div>
   </form>
 </div>
@@ -69,11 +83,24 @@
   <button
     type="button"
     class="btn btn-outline-dark"
-    (click)="saveandclose([title.value, startDate.value, endDate.value, this])"
-	
+    (click)="
+      saveandclose([
+        title.value,
+        description.value,
+        startDate.value,
+        endDate.value,
+        isFlexible.checked,
+        days.value,
+        hours.value,
+        minutes.value,
+        isRepeating.checked,
+        startDateRepeat.value,
+        endDateRepeat.value,
+		[dow1.checked, dow2.checked,dow3.checked,dow4.checked,dow5.checked,dow6.checked,dow7.checked,],
+        this
+      ])
+    "
   >
     Save
   </button>
 </div>
-
-

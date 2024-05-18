@@ -4,6 +4,11 @@ export interface EventData {
     description: string,
     startTime: string,
     endTime: string,
-    period: string,
-    userId: string
+    isFlexible: boolean,
+    duration: number,
+    isRepeating: boolean,
+    startDateRepeating: string,
+    endDateRepeating: string,
+    userId: string,
+    repeatDays: string[]
 }

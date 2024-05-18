@@ -28,17 +28,17 @@ export class EventServiceService {
   addEvent(event: EventData){
     console.log('Adding event')
     const body = JSON.stringify({
-      title: 'TEST NET 35',
-      description: 'Virker det',
-      startTime: '2024-05-12T10:00:00',
-      endTime: '2024-05-12T11:00:00',
-      repeatStartDate: null,
-      repeatEndDate: null,
-      duration: null,
-      userId: '1',
-      repeatDays: null,
-      flexible: null,
-      repeating: null,
+      title: event.title,
+      description: event.description,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      repeatStartDate: event.startDateRepeating,
+      repeatEndDate: event.endDateRepeating,
+      duration: event.duration,
+      userId: event.userId,
+      repeatDays: event.repeatDays,
+      isFlexible: event.isFlexible,
+      isRepeating: event.isRepeating,
     });
 
 console.log(body);
