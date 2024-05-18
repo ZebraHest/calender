@@ -1,4 +1,5 @@
 import { Component, inject, TemplateRef } from '@angular/core';
+import { EventData } from '../event-data';
 
 
 import {
@@ -7,6 +8,7 @@ import {
   NgbModal,
   NgbActiveModal,
 } from '@ng-bootstrap/ng-bootstrap';
+import { EventServiceService } from '../event-service.service';
 
 @Component({
   selector: 'app-modal2',
@@ -17,6 +19,7 @@ import {
 export class ModalComponent {
   private modalService = inject(NgbModal);
   activeModal = inject(NgbActiveModal);
+  eventService: EventServiceService = inject(EventServiceService);
 
   closeResult = '';
   date: any;
@@ -37,19 +40,19 @@ export class ModalComponent {
   //     console.log(this.closeResult);
   // }
 
-  saveandclose(t: any[]){
+  saveandclose(t: any[]) {
     console.log(t);
-    this.activeModal.close();
-  }
-
-  private getDismissReason(reason: any): string {
-    switch (reason) {
-      case ModalDismissReasons.ESC:
-        return 'by pressing ESC';
-      case ModalDismissReasons.BACKDROP_CLICK:
-        return 'by clicking on a backdrop';
-      default:
-        return `with: ${reason}`;
+    let eventData: EventData = {
+      title: t.at(0),
+      id: 0,
+      description: '',
+      startTime: t.at(1),
+      endTime: t.at(2),
+      period: '',
+      userId: ''
     }
+    console.log(eventData);
+    this.eventService.addEvent(eventData);
+    this.activeModal.close();
   }
 }

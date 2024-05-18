@@ -5,17 +5,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   let calendarEl: HTMLElement = document.getElementById('calendar')!;
-
-//   let calendar = new Calendar(calendarEl, {
-//     plugins: [dayGridPlugin],
-//     // options here
-//   });
-
-//   calendar.render();
-// });
-
 @Component({
   selector: 'app-calender',
   standalone: true,

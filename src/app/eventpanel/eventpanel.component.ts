@@ -18,9 +18,7 @@ export class EventpanelComponent {
   eventService: EventServiceService = inject(EventServiceService);
 
   constructor() {
-
-    this.eventService.getAllEvents().then((list: EventData[]) => {
-      console.log(list);
+    this.eventService.getAllEvents().subscribe((list: EventData[]) => {
       this.events = list;
       this.filteredEvents = this.events;
     });
