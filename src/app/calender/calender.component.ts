@@ -28,7 +28,7 @@ export class CalenderComponent {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
     initialEvents: {
-      url: 'http://localhost:8080/event/all',
+      url: 'http://localhost:8080/scheduler/get',
     },
     eventDataTransform: this.transformEventData,
   };
