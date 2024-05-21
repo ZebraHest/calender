@@ -1,7 +1,6 @@
 import { Component, Input, TemplateRef, inject } from '@angular/core';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
-import { EventSourceInput } from '@fullcalendar/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -34,15 +33,10 @@ export class EventpanelComponent {
     );
   }
 
-  mouseOverEvent() {
-    console.log('Over Event');
-  }
-
   private modalService = inject(NgbModal);
 
   open() {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.name = 'World';
-    console.log(modalRef);
   }
 }

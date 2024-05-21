@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions, EventInputTransformer, EventSourceInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
 
@@ -25,10 +26,15 @@ export class CalenderComponent {
   };
 
   calenderOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin],
+    initialView: 'timeGridWeek',
+    plugins: [dayGridPlugin, timeGridPlugin],
     initialEvents: {
       url: 'http://localhost:8080/scheduler/get',
+    },
+    headerToolbar: {
+      left: 'prev,next',
+    center: 'title',
+    right: 'timeGridDay,timeGridWeek,dayGridMonth'
     },
     eventDataTransform: this.transformEventData,
   };

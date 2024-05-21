@@ -1,17 +1,14 @@
 
 
-<section>
-  <form>
-    <input type="text" placeholder="Filter" #filter />
-    <button class="search" type="button" (click)="filterResults(filter.value)">
-      Search
-    </button>
+<section class="eventpanel">
+  <div class="filterline">
+    <input type="search" placeholder="Filter" class ="filter" #filter (keyup)="filterResults(filter.value)" (search)="filterResults(filter.value)" />
     <button class="add" type="button" (click)="open()">Add</button>
-  </form>
+  </div>
 
 
 
-  <ul>
+  <ul id="myUL">
     @for (event of filteredEvents; track $index) {
         
     <li>

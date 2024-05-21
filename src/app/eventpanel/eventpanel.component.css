@@ -1,3 +1,4 @@
+
 /* Style for the box */
 .hover-box {
     display: none;
@@ -10,15 +11,39 @@
     z-index: 1;
 }
 
+.filterline{
+    display: flex;
+}
+
+.add{
+    text-align: center;
+    border-radius: 8px;
+}
+
+.filter{
+    border-radius: 8px;
+    margin-right: 3px;
+    width: 100%;
+    flex-grow: 1;
+}
+
 /* Style for list items */
 li {
     position: relative;
     /* Make sure the box position is relative to the list item */
     cursor: pointer;
     /* Change cursor to pointer on hover */
+    padding-left: 20px;
 }
 
 /* Show the box when hovering over list item */
 li:hover .hover-box {
     display: block;
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
