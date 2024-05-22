@@ -26,7 +26,6 @@ export class EventServiceService {
   }
 
   addEvent(event: EventData){
-    console.log('Adding event')
     const body = JSON.stringify({
       title: event.title,
       description: event.description,
@@ -35,13 +34,11 @@ export class EventServiceService {
       repeatStartDate: event.startDateRepeating,
       repeatEndDate: event.endDateRepeating,
       duration: event.duration,
-      userId: event.userId,
+      userId: "1",
       repeatDays: event.repeatDays,
       isFlexible: event.isFlexible,
       isRepeating: event.isRepeating,
     });
-
-console.log(body);
 
     const data = this.http.post(
       this.eventsUrl + '/add',
@@ -49,6 +46,6 @@ console.log(body);
       httpOptions
     );
     console.log(data);
-    return data.subscribe();
+    return data;
   }
 }

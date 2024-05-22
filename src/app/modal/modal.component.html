@@ -94,6 +94,13 @@
   </form>
 </div>
 <div class="modal-footer">
+
+  <div class="errordiv">
+  @for (error of errors; track $index) {
+    <label class="error">{{error}}</label>
+  }
+  </div>
+
   <button
     type="button"
     class="btn btn-outline-dark"

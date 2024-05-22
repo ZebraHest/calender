@@ -41,3 +41,19 @@
 #isRepeating:not(:checked)~.repeat {
     display: none;
 }
+
+.modal-footer{
+    display: flex;
+}
+
+.errordiv{
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.error{
+    color: red;
+    font-size: 10px;
+    margin-right: 10px;
+}

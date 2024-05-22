@@ -1,7 +1,6 @@
 import { Component, inject, TemplateRef } from '@angular/core';
 import { EventData } from '../event-data';
 
-
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
@@ -22,11 +21,9 @@ export class ModalComponent {
   activeModal = inject(NgbActiveModal);
   eventService: EventServiceService = inject(EventServiceService);
 
-  closeResult = '';
-  date: any;
+  errors = [];
 
   saveandclose(t: any[]) {
-    console.log(t);
     let eventData: EventData = {
       id: 0,
       title: t.at(0),
@@ -41,9 +38,16 @@ export class ModalComponent {
       repeatDays: this.transformRepeatDays(t.at(11)),
       userId: '',
     };
-    console.log(eventData);
-    this.eventService.addEvent(eventData);
-    this.activeModal.close();
+    const returndata = this.eventService.addEvent(eventData).subscribe({
+      // next: (data) => console.log('Next'),
+      error: (error) => (
+        console.log('oops', error), (this.errors = error.error.errors)
+      ),
+      complete: () => this.activeModal.close(),
+    });
+
+
+    // this.activeModal.close();
   }
 
   transformRepeatDays(days: boolean[]): string[] {
