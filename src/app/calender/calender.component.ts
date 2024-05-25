@@ -45,21 +45,29 @@ export class CalenderComponent {
     events: {
       url: 'http://localhost:8080/scheduler/get',
     },
+    customButtons: {
+      updateButton: {
+        text: 'update',
+        click: () => this.updateCalender(),
+      },
+    },
     headerToolbar: {
       left: 'prev,next',
       center: 'title',
-      right: 'timeGridDay,timeGridWeek,dayGridMonth',
+      right: 'updateButton timeGridDay,timeGridWeek,dayGridMonth',
     },
     eventDataTransform: this.transformEventData,
   };
 
   updateCalenderWithDelay() {
     console.log('update calender');
-    timer(1000).subscribe(x => {this.updateCalender();})
+    timer(1000).subscribe((x) => {
+      this.updateCalender();
+    });
   }
 
-  updateCalender(){
-   console.log('update calender');
+  updateCalender() {
+    console.log('update calender');
     this.calendarComponent.getApi().refetchEvents();
   }
 }
