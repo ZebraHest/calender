@@ -10,16 +10,16 @@ import { SharedCloseService } from '../shared-close.service';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
-  selector: 'app-calender',
+  selector: 'app-calendar',
   standalone: true,
   imports: [FullCalendarModule],
-  templateUrl: './calender.component.html',
-  styleUrl: './calender.component.css',
+  templateUrl: './calendar.component.html',
+  styleUrl: './calendar.component.css',
 })
-export class CalenderComponent {
+export class CalendarComponent {
   events: EventSourceInput[] = [];
   eventService: EventServiceService = inject(EventServiceService);
-  @ViewChild('calender') calendarComponent!: FullCalendarComponent;
+  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
 
   clickEventsubscription: Subscription;
 
@@ -27,7 +27,7 @@ export class CalenderComponent {
     this.clickEventsubscription = this.sharedService
       .getCloseEvent()
       .subscribe(() => {
-        this.updateCalenderWithDelay();
+        this.updateCalendarWithDelay();
       });
   }
 
@@ -39,7 +39,7 @@ export class CalenderComponent {
     };
   };
 
-  calenderOptions: CalendarOptions = {
+  calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin],
     events: {
@@ -48,7 +48,7 @@ export class CalenderComponent {
     customButtons: {
       updateButton: {
         text: 'update',
-        click: () => this.updateCalender(),
+        click: () => this.updateCalendar(),
       },
     },
     headerToolbar: {
@@ -59,15 +59,15 @@ export class CalenderComponent {
     eventDataTransform: this.transformEventData,
   };
 
-  updateCalenderWithDelay() {
-    console.log('update calender');
+  updateCalendarWithDelay() {
+    console.log('update calendar');
     timer(1000).subscribe((x) => {
-      this.updateCalender();
+      this.updateCalendar();
     });
   }
 
-  updateCalender() {
-    console.log('update calender');
+  updateCalendar() {
+    console.log('update calendar');
     this.calendarComponent.getApi().refetchEvents();
   }
 }
