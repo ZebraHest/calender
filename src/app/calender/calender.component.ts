@@ -1,10 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions, EventInputTransformer, EventSourceInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
+import { Subscription , timer} from 'rxjs';
+import { SharedCloseService } from '../shared-close.service';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-calender',
@@ -16,6 +19,17 @@ import { EventServiceService } from '../event-service.service';
 export class CalenderComponent {
   events: EventSourceInput[] = [];
   eventService: EventServiceService = inject(EventServiceService);
+  @ViewChild('calender') calendarComponent!: FullCalendarComponent;
+
+  clickEventsubscription: Subscription;
+
+  constructor(private sharedService: SharedCloseService) {
+    this.clickEventsubscription = this.sharedService
+      .getCloseEvent()
+      .subscribe(() => {
+        this.updateCalenderWithDelay();
+      });
+  }
 
   transformEventData: EventInputTransformer = (eventInput) => {
     return {
@@ -28,14 +42,24 @@ export class CalenderComponent {
   calenderOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin],
-    initialEvents: {
+    events: {
       url: 'http://localhost:8080/scheduler/get',
     },
     headerToolbar: {
       left: 'prev,next',
-    center: 'title',
-    right: 'timeGridDay,timeGridWeek,dayGridMonth'
+      center: 'title',
+      right: 'timeGridDay,timeGridWeek,dayGridMonth',
     },
     eventDataTransform: this.transformEventData,
   };
+
+  updateCalenderWithDelay() {
+    console.log('update calender');
+    timer(1000).subscribe(x => {this.updateCalender();})
+  }
+
+  updateCalender(){
+   console.log('update calender');
+    this.calendarComponent.getApi().refetchEvents();
+  }
 }

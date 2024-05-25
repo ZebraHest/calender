@@ -8,6 +8,8 @@ import {
   NgbActiveModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { EventServiceService } from '../event-service.service';
+import { SharedCloseService } from '../shared-close.service';
+
 
 @Component({
   selector: 'app-modal2',
@@ -22,6 +24,8 @@ export class ModalComponent {
   eventService: EventServiceService = inject(EventServiceService);
 
   errors = [];
+
+  constructor(private closeService: SharedCloseService){};
 
   saveandclose(t: any[]) {
     let eventData: EventData = {
@@ -39,15 +43,20 @@ export class ModalComponent {
       userId: '',
     };
     const returndata = this.eventService.addEvent(eventData).subscribe({
-      // next: (data) => console.log('Next'),
-      error: (error) => (
-        console.log('oops', error), (this.errors = error.error.errors)
-      ),
-      complete: () => this.activeModal.close(),
+
+      error: (error) => {
+        console.log('oops', error), (this.errors = error.error.errors);
+        this.closeService.sendClickEvent(); //TODO Remove
+      }
+      ,
+      complete: () => {
+        this.activeModal.close();
+        this.closeService.sendClickEvent();
+      },
     });
 
 
-    // this.activeModal.close();
+    
   }
 
   transformRepeatDays(days: boolean[]): string[] {
