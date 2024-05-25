@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SharedCloseService {
   private subject = new Subject<any>();
-  sendClickEvent() {
+  sendCloseEvent() {
     this.subject.next("");
   }
 

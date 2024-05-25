@@ -46,12 +46,11 @@ export class ModalComponent {
 
       error: (error) => {
         console.log('oops', error), (this.errors = error.error.errors);
-        this.closeService.sendClickEvent(); //TODO Remove
       }
       ,
       complete: () => {
         this.activeModal.close();
-        this.closeService.sendClickEvent();
+        this.closeService.sendCloseEvent();
       },
     });
 
