@@ -1,11 +1,16 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { Calendar, CalendarOptions, EventInputTransformer, EventSourceInput } from '@fullcalendar/core';
+import {
+  Calendar,
+  CalendarOptions,
+  EventInputTransformer,
+  EventSourceInput,
+} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventData } from '../event-data';
 import { EventServiceService } from '../event-service.service';
-import { Subscription , timer} from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { SharedCloseService } from '../shared-close.service';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 
@@ -41,6 +46,7 @@ export class CalendarComponent {
 
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
+    firstDay: 1,
     plugins: [dayGridPlugin, timeGridPlugin],
     events: {
       url: 'http://localhost:8080/scheduler/get',
@@ -56,6 +62,20 @@ export class CalendarComponent {
       center: 'title',
       right: 'updateButton timeGridDay,timeGridWeek,dayGridMonth',
     },
+
+    businessHours: [
+      {
+        daysOfWeek: [1, 2, 3, 4],
+        startTime: '08:00',
+        endTime: '18:00',
+        backgroundColor: '#000000',
+      },
+      {
+        daysOfWeek: [5],
+        startTime: '08:00',
+        endTime: '16:00',
+      },
+    ],
     eventDataTransform: this.transformEventData,
   };
 

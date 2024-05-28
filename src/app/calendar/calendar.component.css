@@ -1,0 +1,17 @@
+:root {
+    --fc-non-business-color: black !important;
+    --fc-border-color: #000000 !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+    /* needs to be same precedence */
+    padding-top: 50px;
+    /* an override! */
+    padding-bottom: 50px;
+    /* an override! */
+}
+
+#calendar {
+    max-width: 110px !important;
+    margin: 400px auto;
+}
