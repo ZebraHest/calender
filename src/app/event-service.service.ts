@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { EventData } from './event-data';
+import { EventData } from './data/event-data';
 import { Observable } from 'rxjs';
 
 const httpOptions = {

@@ -8,7 +8,7 @@ import {
 } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { EventData } from '../event-data';
+import { EventData } from '../data/event-data';
 import { EventServiceService } from '../event-service.service';
 import { Subscription, timer } from 'rxjs';
 import { SharedCloseService } from '../shared-close.service';

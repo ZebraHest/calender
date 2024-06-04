@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef, inject } from '@angular/core';
-import { EventData } from '../event-data';
+import { EventData } from '../data/event-data';
 import { EventServiceService } from '../event-service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';

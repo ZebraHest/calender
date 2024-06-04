@@ -1,5 +1,5 @@
 import { Component, inject, TemplateRef } from '@angular/core';
-import { EventData } from '../event-data';
+import { EventData } from '../data/event-data';
 
 import {
   ModalDismissReasons,
