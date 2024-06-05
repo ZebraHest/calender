@@ -1,0 +1,27 @@
+/* #jump {
+    background-color: white;
+    border: 2px;
+    border-color: black;
+}
+
+#con {
+    background-color: white;
+    border: 2px;
+        border-color: black;
+} */
+
+/* .jumbotron {
+    background-color: white;
+    border: 2px;
+    border-color: black;
+} */
+
+.container {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    width: 250px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 200px;
+}

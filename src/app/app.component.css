@@ -1,18 +1,3 @@
-.content{
-    background-color: rgb(202, 202, 221);
-    display: grid;
-    grid-template-columns: 300px auto;
-    
-}
-.calendar{
-    margin: 3px;
-}
-
-.eventpanel {
-    background-color: rgb(201, 247, 247);
-    margin: 3px;
-}
-
 .page-header{
     margin: 3px;
 }

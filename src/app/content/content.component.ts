@@ -5,17 +5,18 @@ import { UserService } from '../user.service';
 import { WelcomeComponent } from "../welcome/welcome.component";
 import { EventpanelComponent } from "../eventpanel/eventpanel.component";
 import { response } from 'express';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
     selector: 'app-content',
     standalone: true,
     templateUrl: './content.component.html',
     styleUrl: './content.component.css',
-    imports: [LoginComponent, ButtonsComponent, WelcomeComponent, EventpanelComponent]
+    imports: [LoginComponent, ButtonsComponent, WelcomeComponent, EventpanelComponent, CalendarComponent]
 })
 export class ContentComponent {
   data: string[] = [];
-  componentToShow: string = "welcome";
+  componentToShow: string = "event";
 
   constructor(private userService: UserService) {}
 
