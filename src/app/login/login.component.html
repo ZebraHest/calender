@@ -3,7 +3,7 @@
     <ul class="nav nav-pills nav justified mb-3" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <button
-          [class]="active === 'login' ? 'nav-link active' : 'nav-link'"
+          [class]="active.value === 'login' ? 'nav-link active' : 'nav-link'"
           id="tab-login"
           (click)="onLoginTab()"
         >
@@ -12,25 +12,18 @@
       </li>
       <li class="nav-item" role="presentation">
         <button
-          [class]="active === 'register' ? 'nav-link active' : 'nav-link'"
+          [class]="active.value === 'register' ? 'nav-link active' : 'nav-link'"
           id="tab-register"
           (click)="onRegisterTab()"
         >
           Register
         </button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button
-          (click)="reset()"
-        >
-          reset
-        </button>
-      </li>
     </ul>
   </div>
 
   <div class="tab-content">
-    <div [class]="active === 'login' ? 'tab-pane fade show active' : 'tab-pane fade'">
+    <div [class]="active.value === 'login' ? 'tab-pane fade show active' : 'tab-pane fade'">
     <div class="row justify-content-center">
       <form #loginForm>
         <div class="form-outline mb-4">
@@ -41,7 +34,7 @@
             name="login"
             placeholder=""
             #loginInput
-            (input)="login = loginInput.value"
+            [formControl]="login"
           />
           <label class="form-label" for="loginName">Username</label>
         </div>
@@ -53,7 +46,7 @@
             id="loginPassword"
             name="password"
             #passwordInput
-            (input)="password = passwordInput.value"
+            [formControl]="password"
           />
           <label class="form-label" for="loginPassword">Password</label>
         </div>
@@ -65,7 +58,7 @@
     </div>
     </div>
 
-    <div [class]="active === 'register' ? 'tab-pane fade show active' : 'tab-pane fade'">
+    <div [class]="active.value === 'register' ? 'tab-pane fade show active' : 'tab-pane fade'">
     <div class="row justify-content-center">
       <form #registerForm>
         <div class="form-outline mb-4">
@@ -75,7 +68,7 @@
             id="firstName"
             name="firstName"
             #registerFirstName
-            (input)="firstName = registerFirstName.value"
+            [formControl]="firstName"
           />
           <label class="form-label" for="firstName">First Name</label>
         </div>
@@ -87,7 +80,7 @@
             id="lastName"
             name="lastName"
             #registerLastName
-            (input)="lastName = registerLastName.value"
+            [formControl]="lastName"
           />
           <label class="form-label" for="firstName">Last Name</label>
         </div>
@@ -99,7 +92,7 @@
             id="loginName"
             name="login"
             #loginReg
-            (input)="login = loginReg.value"
+            [formControl]="login"
           />
           <label class="form-label" for="loginName">Username</label>
         </div>
@@ -111,7 +104,7 @@
             id="loginPassword"
             name="password"
             #passwordReg
-            (input)="password = passwordReg.value"
+            [formControl]="password"
           />
           <label class="form-label" for="loginPassword">Password</label>
         </div>

@@ -1,26 +1,27 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   @Output() onSubmitLoginEvent = new EventEmitter();
   @Output() onSubmitRegisterEvent = new EventEmitter();
-
-  firstName: string = '';
-  lastName: string = '';
-  login: string = '';
-  password: string = '';
-  active: string = 'login';
+  
+  firstName = new FormControl('');
+  lastName= new FormControl('');
+  login= new FormControl('');
+  password= new FormControl('');
+  active= new FormControl('login');
 
   onSubmitLogin(): void {
     this.onSubmitLoginEvent.emit({
-      login: this.login,
-      password: this.password,
+      login: this.login.value,
+      password: this.password.value,
     });
     this.reset();
   }
@@ -36,18 +37,18 @@ export class LoginComponent {
   }
   onRegisterTab() {
     this.reset();
-    this.active = 'register';
+    this.active.setValue('register');
   }
   onLoginTab() {
     this.reset();
-    this.active = 'login';
+    this.active.setValue('login');
   }
 
   reset():void{
     console.log("RESET");
-    this.firstName = '';
-    this.lastName = '';
-    this.login = '';
-    this.password = '';
+    this.firstName.setValue('');
+    this.lastName.setValue('');
+    this.login.setValue('');
+    this.password.setValue('');
   }
 }
