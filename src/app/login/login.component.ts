@@ -45,7 +45,6 @@ export class LoginComponent {
   }
 
   reset():void{
-    console.log("RESET");
     this.firstName.setValue('');
     this.lastName.setValue('');
     this.login.setValue('');

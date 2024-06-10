@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, afterRender, inject } from '@angular/core';
+import { Component, Input, TemplateRef, afterNextRender, afterRender, inject } from '@angular/core';
 import { EventData } from '../data/event-data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
@@ -17,7 +17,7 @@ export class EventpanelComponent {
   axiosService: AxiosService = inject(AxiosService);
 
   constructor() {
-    afterRender (() => {
+    afterNextRender (() => {
       this.get();
     })
   }
@@ -28,11 +28,8 @@ export class EventpanelComponent {
   
   get(){
      this.axiosService.request('GET', '/event/all', {}).then((response) => {
-       console.log(response);
-       console.log(this.events);
        this.events = response.data;
        this.filteredEvents = this.events;
-       console.log(this.events);
      });
   }
 

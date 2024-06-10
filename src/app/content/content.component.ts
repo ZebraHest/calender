@@ -20,16 +20,6 @@ export class ContentComponent {
 
   constructor(private axiosService: AxiosService) {}
 
-  //   ngOnInit(): void{
-  //     this.userService.request(
-  //         "GET",
-  //         "/all",
-  //         ""
-  //     ).then(
-  //         (response) => this.data = response.data
-  //     );
-  //   }
-
   showComponent(componentToShow: string): void{
     this.componentToShow = componentToShow;
   }
@@ -43,15 +33,11 @@ export class ContentComponent {
       })
       .then((response) => {
         this.axiosService.setAuthToken(response.data.token);
-        console.log(response);
         this.componentToShow = 'event';
       });
   }
 
   onRegister(input: any): void {
-    // console.log(input.login);
-    // console.log(input.password);
-    // this.userService.getAllUsers();
     var stuff = this.axiosService
       .request('POST', '/user/register', {
         firstName: input.firstName,
@@ -63,7 +49,5 @@ export class ContentComponent {
         this.axiosService.setAuthToken(response.data.token);
         this.componentToShow = 'event';
       });
-
-    console.log(stuff);
   }
 }

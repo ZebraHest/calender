@@ -10,73 +10,73 @@
 </div>
 <div class="modal-body">
   <form>
-    <div class="mb-3">
-      <input id="title" class="text-input" placeholder="Title" #title />
+
+      <input id="title" class="text-input form-outline" placeholder="Title" #titleInput [formControl]="title"/>
       <br />
-      <input type="checkbox" id="isFlexible" name="isFlexible" #isFlexible />
+      <input type="checkbox" id="isFlexible" name="isFlexible" #isFlexibleInput [formControl]="isFlexible"/>
       <label for="isFlexible">Flexible</label>
       <br />
-      <input type="checkbox" id="isRepeating" name="isRepeating" #isRepeating />
+      <input type="checkbox" id="isRepeating" name="isRepeating" #isRepeatingInput [formControl]="isRepeating"/>
       <label for="isRepeating">Repeating</label>
       <div class="normaltime">
         <label for="startDate">Start Date</label>
-        <input type="datetime-local" #startDate id="startDate" />
+        <input type="datetime-local" #startDateInput id="startDate" [formControl]="startTime"/>
         <br />
         <label for="endDate">End Date</label>
-        <input type="datetime-local" #endDate id="endDate" />
+        <input type="datetime-local" #endDateInput id="endDate" [formControl]="endTime"/>
       </div>
       <div class="flextime">
         <label for="startDate">Start Date</label>
-        <input type="time" #startDateFlex id="startDateFlex" />
+        <input type="time" #startDateFlexInput id="startDateFlex" [formControl]="startTime"/>
         <br />
         <label for="endDate">End Date</label>
-        <input type="time" #endDateFlex id="endDateFlex" />
+        <input type="time" #endDateFlexInput id="endDateFlex" [formControl]="endTime"/>
       </div>
       <div class="durationdiv">
         <label for="duration">Duration</label>
         <form id="duration">
-          <input id="d" name="d" type="number" min="0" max="365" #days />
+          <input id="d" name="d" type="number" min="0" max="365" #daysInput [formControl]="durationDays"/>
           <label for="d">d</label>
-          <input id="h" name="h" type="number" min="0" max="23" #hours />
+          <input id="h" name="h" type="number" min="0" max="23" #hoursInput [formControl]="durationHours"/>
           <label for="h">h</label>
-          <input id="m" name="m" type="number" min="0" max="59" #minutes />
+          <input id="m" name="m" type="number" min="0" max="59" #minutesInput [formControl]="durationMinutes"/>
           <label for="m">m</label>
         </form>
       </div>
 
       <div class="repeat">
         <label for="startDateRepeat">Repeating Start Date</label>
-        <input type="date" #startDateRepeat id="startDateRepeat" />
+        <input type="date" #startDateRepeatInput id="startDateRepeat" [formControl]="startDateRepeating"/>
         <br />
         <label for="endDateRepeat">Repeating End Date</label>
-        <input type="date" #endDateRepeat id="endDateRepeat" />
+        <input type="date" #endDateRepeatInput id="endDateRepeat" [formControl]="endDateRepeating"/>
         <div class="dowPicker">
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow1" #dow1 />
+            <input type="checkbox" id="dow1" #dow1Input [formControl]="repeatMonday"/>
             <label for="dow1">M</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow2" #dow2 />
+            <input type="checkbox" id="dow2" #dow2Input [formControl]="repeatTuesday"/>
             <label for="dow2">T</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow3" #dow3 />
+            <input type="checkbox" id="dow3" #dow3Input [formControl]="repeatWednesday"/>
             <label for="dow3">W</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow4" #dow4 />
+            <input type="checkbox" id="dow4" #dow4Input [formControl]="repeatThursday"/>
             <label for="dow4">T</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow5" #dow5 />
+            <input type="checkbox" id="dow5" #dow5Input [formControl]="repeatFriday"/>
             <label for="dow5">F</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow6" #dow6 />
+            <input type="checkbox" id="dow6" #dow6Input [formControl]="repeatSaturday"/>
             <label for="dow6">S</label>
           </div>
           <div class="dowPickerOption">
-            <input type="checkbox" id="dow7" #dow7 />
+            <input type="checkbox" id="dow7" #dow7Input [formControl]="repeatSunday"/>
             <label for="dow7">S</label>
           </div>
         </div>
@@ -86,11 +86,12 @@
         id="description"
         class="text-input"
         placeholder="Description"
-        #description
+        #descriptionInput
         rows="5"
         cols="33"
+        [formControl]="description"
       ></textarea>
-    </div>
+
   </form>
 </div>
 <div class="modal-footer">
@@ -104,31 +105,7 @@
   <button
     type="button"
     class="btn btn-outline-dark"
-    (click)="
-      saveandclose([
-        title.value,
-        description.value,
-        startDate.value,
-        endDate.value,
-        isFlexible.checked,
-        days.value,
-        hours.value,
-        minutes.value,
-        isRepeating.checked,
-        startDateRepeat.value,
-        endDateRepeat.value,
-        [
-          dow1.checked,
-          dow2.checked,
-          dow3.checked,
-          dow4.checked,
-          dow5.checked,
-          dow6.checked,
-          dow7.checked
-        ],
-        this
-      ])
-    "
+    (click)="saveandclose()"
   >
     Save
   </button>
