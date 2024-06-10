@@ -7,8 +7,8 @@ import {
   NgbModal,
   NgbActiveModal,
 } from '@ng-bootstrap/ng-bootstrap';
-import { EventServiceService } from '../event-service.service';
 import { SharedCloseService } from '../shared-close.service';
+import { AxiosService } from '../axios.service';
 
 
 @Component({
@@ -21,14 +21,14 @@ import { SharedCloseService } from '../shared-close.service';
 export class ModalComponent {
   private modalService = inject(NgbModal);
   activeModal = inject(NgbActiveModal);
-  eventService: EventServiceService = inject(EventServiceService);
+  axiosService: AxiosService = inject(AxiosService);
 
   errors = [];
 
   constructor(private closeService: SharedCloseService){};
 
   saveandclose(t: any[]) {
-    let eventData: EventData = {
+    let event: EventData = {
       id: 0,
       title: t.at(0),
       description: t.at(1),
@@ -42,17 +42,40 @@ export class ModalComponent {
       repeatDays: this.transformRepeatDays(t.at(11)),
       userId: '',
     };
-    const returndata = this.eventService.addEvent(eventData).subscribe({
-
-      error: (error) => {
-        console.log('oops', error), (this.errors = error.error.errors);
-      }
-      ,
-      complete: () => {
-        this.activeModal.close();
-        this.closeService.sendCloseEvent();
-      },
+    
+    this.axiosService.request("POST", "/event/add",{
+      
+      title: event.title,
+      description: event.description,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      repeatStartDate: event.startDateRepeating,
+      repeatEndDate: event.endDateRepeating,
+      duration: event.duration,
+      userId: "1",
+      repeatDays: event.repeatDays,
+      isFlexible: event.isFlexible,
+      isRepeating: event.isRepeating,
+      
+    }).catch((e) => {
+      console.log(e);
+    })
+    .then((response) => {
+      this.activeModal.close();
+      this.closeService.sendCloseEvent();
     });
+
+    // this.eventService.addEvent(eventData).subscribe({
+
+    //   error: (error) => {
+    //     console.log('oops', error), (this.errors = error.error.errors);
+    //   }
+    //   ,
+    //   complete: () => {
+    //     this.activeModal.close();
+    //     this.closeService.sendCloseEvent();
+    //   },
+    // });
 
 
     

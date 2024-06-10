@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { ButtonsComponent } from '../buttons/buttons.component'
-import { UserService } from '../user.service';
 import { WelcomeComponent } from "../welcome/welcome.component";
 import { EventpanelComponent } from "../eventpanel/eventpanel.component";
 import { response } from 'express';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { AxiosService } from '../axios.service';
 
 @Component({
     selector: 'app-content',
@@ -18,7 +18,7 @@ export class ContentComponent {
   data: string[] = [];
   componentToShow: string = "event";
 
-  constructor(private userService: UserService) {}
+  constructor(private axiosService: AxiosService) {}
 
   //   ngOnInit(): void{
   //     this.userService.request(
@@ -37,29 +37,30 @@ export class ContentComponent {
 
   onLogin(input: any): void {
     // this.userService.getAllUsers();
-    this.userService.request('POST', '/login', {
-      login: input.login,
-      password: input.password,
-    }).then(response => {
-      this.userService.setAuthToken(response.data.token);
-      console.log(response);
-      this.componentToShow = 'event';
-    });
+    this.axiosService.request('POST', '/user/login', {
+        login: input.login,
+        password: input.password,
+      })
+      .then((response) => {
+        this.axiosService.setAuthToken(response.data.token);
+        console.log(response);
+        this.componentToShow = 'event';
+      });
   }
 
   onRegister(input: any): void {
-    console.log(input.login);
-    console.log(input.password);
+    // console.log(input.login);
+    // console.log(input.password);
     // this.userService.getAllUsers();
-    var stuff = this.userService
-      .request('POST', '/register', {
+    var stuff = this.axiosService
+      .request('POST', '/user/register', {
         firstName: input.firstName,
         lastName: input.lastName,
         login: input.login,
         password: input.password,
       })
       .then((response) => {
-        this.userService.setAuthToken(response.data.token);
+        this.axiosService.setAuthToken(response.data.token);
         this.componentToShow = 'event';
       });
 

@@ -6,7 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { EventServiceService } from './event-service.service';
+
 
 
 
@@ -15,7 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     importProvidersFrom(HttpClientModule),
-    EventServiceService,
     provideHttpClient(withFetch()),
   ],
 };

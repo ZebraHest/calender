@@ -1,8 +1,8 @@
-import { Component, Input, TemplateRef, inject } from '@angular/core';
+import { Component, Input, TemplateRef, afterRender, inject } from '@angular/core';
 import { EventData } from '../data/event-data';
-import { EventServiceService } from '../event-service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
+import { AxiosService } from '../axios.service';
 
 @Component({
   selector: 'app-eventpanel',
@@ -14,13 +14,26 @@ import { ModalComponent } from '../modal/modal.component';
 export class EventpanelComponent {
   filteredEvents: EventData[] = [];
   events: EventData[] = [];
-  eventService: EventServiceService = inject(EventServiceService);
+  axiosService: AxiosService = inject(AxiosService);
 
   constructor() {
-    this.eventService.getAllEvents().subscribe((list: EventData[]) => {
-      this.events = list;
-      this.filteredEvents = this.events;
-    });
+    afterRender (() => {
+      this.get();
+    })
+  }
+
+  ngOnInit(){
+   
+  }
+  
+  get(){
+     this.axiosService.request('GET', '/event/all', {}).then((response) => {
+       console.log(response);
+       console.log(this.events);
+       this.events = response.data;
+       this.filteredEvents = this.events;
+       console.log(this.events);
+     });
   }
 
   filterResults(text: string) {

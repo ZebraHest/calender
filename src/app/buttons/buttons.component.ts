@@ -1,5 +1,6 @@
 import { Component, Output , EventEmitter} from '@angular/core';
-import { UserService } from '../user.service';
+import { AxiosService } from '../axios.service';
+
 
 @Component({
   selector: 'app-buttons',
@@ -12,11 +13,11 @@ export class ButtonsComponent {
   @Output() loginEvent = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
 
-  constructor(private userService: UserService) {};
+  constructor(private axiosService: AxiosService) {};
 
   logout() {
     this.logoutEvent.emit();
-    this.userService.setAuthToken(null);
+    this.axiosService.setAuthToken(null);
   }
 
   login() {

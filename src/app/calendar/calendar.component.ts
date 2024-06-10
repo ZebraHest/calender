@@ -9,10 +9,10 @@ import {
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventData } from '../data/event-data';
-import { EventServiceService } from '../event-service.service';
 import { Subscription, timer } from 'rxjs';
 import { SharedCloseService } from '../shared-close.service';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { AxiosService } from '../axios.service';
 
 @Component({
   selector: 'app-calendar',
@@ -23,7 +23,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class CalendarComponent {
   events: EventSourceInput[] = [];
-  eventService: EventServiceService = inject(EventServiceService);
+  axiosService: AxiosService = inject(AxiosService);
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
 
   clickEventsubscription: Subscription;

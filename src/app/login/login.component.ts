@@ -28,14 +28,14 @@ export class LoginComponent {
 
   onSubmitRegister() {
     this.onSubmitRegisterEvent.emit({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      login: this.login,
-      password: this.password,
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      login: this.login.value,
+      password: this.password.value,
     });
     this.reset();
   }
-  onRegisterTab() {
+  onRegisterTab() { 
     this.reset();
     this.active.setValue('register');
   }
