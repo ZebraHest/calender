@@ -1,6 +1,6 @@
 <!-- <ng-template #content let-modal> -->
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+  <h4 class="modal-title" id="modal-basic-title">Add Event</h4>
   <button
     type="button"
     class="btn-close"
@@ -11,27 +11,42 @@
 <div class="modal-body">
   <form>
 
-      <input id="title" class="text-input form-outline" placeholder="Title" #titleInput [formControl]="title"/>
-      <br />
-      <input type="checkbox" id="isFlexible" name="isFlexible" #isFlexibleInput [formControl]="isFlexible"/>
-      <label for="isFlexible">Flexible</label>
-      <br />
-      <input type="checkbox" id="isRepeating" name="isRepeating" #isRepeatingInput [formControl]="isRepeating"/>
-      <label for="isRepeating">Repeating</label>
+      <input id="title" class="text-input form-outline form-control" placeholder="Title" #titleInput [formControl]="title"/>
+      
+      <div>
+        <input type="checkbox" id="isFlexible" name="isFlexible" #isFlexibleInput [formControl]="isFlexible"/>
+        <label for="isFlexible">Flexible</label>
+      </div>
+      <div>
+        <input type="checkbox" id="isRepeating" name="isRepeating" #isRepeatingInput [formControl]="isRepeating"/>
+        <label for="isRepeating">Repeating</label>
+      </div>
+
+      @if(!isRepeating.value){
       <div class="normaltime">
-        <label for="startDate">Start Date</label>
-        <input type="datetime-local" #startDateInput id="startDate" [formControl]="startTime"/>
-        <br />
-        <label for="endDate">End Date</label>
-        <input type="datetime-local" #endDateInput id="endDate" [formControl]="endTime"/>
+        <div class="">
+          <label for="startDate">Start Date</label>
+          <input type="datetime-local" #startDateInput id="startDate" [formControl]="startTime"/>
+        </div>
+        <div>
+          <label for="endDate">End Date</label>
+          <input type="datetime-local" #endDateInput id="endDate" [formControl]="endTime"/>
+        </div>
       </div>
+    }@else {
       <div class="flextime">
-        <label for="startDate">Start Date</label>
+        <div>
+        <label for="startDate">Start Time</label>
         <input type="time" #startDateFlexInput id="startDateFlex" [formControl]="startTime"/>
-        <br />
-        <label for="endDate">End Date</label>
+        </div>
+        <div>
+        <label for="endDate">End Time</label>
         <input type="time" #endDateFlexInput id="endDateFlex" [formControl]="endTime"/>
+        </div>
       </div>
+    }
+      
+      @if(isFlexible.value){
       <div class="durationdiv">
         <label for="duration">Duration</label>
         <form id="duration">
@@ -43,13 +58,18 @@
           <label for="m">m</label>
         </form>
       </div>
+    }
 
+      @if(isRepeating.value) {
       <div class="repeat">
+        <div>
         <label for="startDateRepeat">Repeating Start Date</label>
         <input type="date" #startDateRepeatInput id="startDateRepeat" [formControl]="startDateRepeating"/>
-        <br />
+        </div>
+        <div>
         <label for="endDateRepeat">Repeating End Date</label>
         <input type="date" #endDateRepeatInput id="endDateRepeat" [formControl]="endDateRepeating"/>
+        </div>
         <div class="dowPicker">
           <div class="dowPickerOption">
             <input type="checkbox" id="dow1" #dow1Input [formControl]="repeatMonday"/>
@@ -81,7 +101,8 @@
           </div>
         </div>
       </div>
-      <br />
+    }
+      <div>
       <textarea
         id="description"
         class="text-input"
@@ -91,6 +112,7 @@
         cols="33"
         [formControl]="description"
       ></textarea>
+      </div>
 
   </form>
 </div>

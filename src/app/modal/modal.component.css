@@ -26,22 +26,6 @@
     }
 } 
 
-#isFlexible:not(:checked)~.durationdiv {
-    display: none;
-}
-
-#isRepeating:checked ~ .normaltime{
-    display: none;
-}
-
-#isRepeating:not(:checked) ~ .flextime {
-    display: none;
-}
-
-#isRepeating:not(:checked)~.repeat {
-    display: none;
-}
-
 .modal-footer{
     display: flex;
 }
