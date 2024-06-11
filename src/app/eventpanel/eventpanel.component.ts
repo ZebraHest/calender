@@ -3,6 +3,7 @@ import { EventData } from '../data/event-data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 import { AxiosService } from '../axios.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-eventpanel',
@@ -46,7 +47,20 @@ export class EventpanelComponent {
   private modalService = inject(NgbModal);
 
   open() {
+    const modalRef = this.modalService.open(ModalComponent, {
+      // data: { name: 'tets' },
+      // disableClose: true,
+    });
+    
+  }
+
+  currentEvent: EventData | undefined;
+
+  edit(event: EventData) {
+    console.log(event);
     const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.name = 'World';
+    console.log("1");
+    modalRef.componentInstance.editEvent = event;
+    console.log('2');
   }
 }

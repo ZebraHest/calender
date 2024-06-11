@@ -11,7 +11,7 @@
   <ul id="myUL">
     @for (event of filteredEvents; track $index) {
         
-    <li>
+    <li (click)="edit(event)">
       {{event.title}}
       
       <div class="hover-box">
