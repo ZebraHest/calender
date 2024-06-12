@@ -124,6 +124,7 @@
   }
   </div>
 
+  @if ( editEvent == undefined){
   <button
     type="button"
     class="btn btn-outline-dark"
@@ -131,6 +132,7 @@
   >
     Save
   </button>
+} @else { 
 
   <button
     type="button"
@@ -139,7 +141,7 @@
   >
     Update
   </button>
-  
+
   <button
     type="button"
     class="btn btn-outline-dark"
@@ -147,4 +149,5 @@
   >
     Delete
   </button>
+}
 </div>
