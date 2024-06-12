@@ -13,7 +13,7 @@ export class AxiosService {
   }
 
   getAuthToken(): string | null {
-    if(window == null){
+    if (window == null) {
       return null;
     }
 

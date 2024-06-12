@@ -3,7 +3,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import {
   Calendar,
   CalendarOptions,
+  EventInput,
   EventInputTransformer,
+  EventSourceFuncArg,
   EventSourceInput,
 } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -22,7 +24,7 @@ import { AxiosService } from '../axios.service';
   styleUrl: './calendar.component.css',
 })
 export class CalendarComponent {
-  events: EventSourceInput[] = [];
+  events: String[] = [];
   axiosService: AxiosService = inject(AxiosService);
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
 
@@ -48,9 +50,7 @@ export class CalendarComponent {
     initialView: 'timeGridWeek',
     firstDay: 1,
     plugins: [dayGridPlugin, timeGridPlugin],
-    events: {
-      url: 'http://localhost:8080/scheduler/get',
-    },
+    events: this.eventFunction(),
     customButtons: {
       updateButton: {
         text: 'update',
@@ -79,6 +79,22 @@ export class CalendarComponent {
     eventDataTransform: this.transformEventData,
   };
 
+  private eventFunction(): EventSourceInput | undefined {
+    return (info, sucessCallback, failureCallBack) => {
+      console.log(info);
+      this.axiosService
+        .request('GET', '/scheduler/get', {})
+        .catch((err) => {
+          failureCallBack(err);
+        })
+        .then((res) => {
+          console.log('HEST');
+          console.log(res);
+          sucessCallback(res.data);
+        });
+    };
+  }
+
   updateCalendarWithDelay() {
     console.log('update calendar');
     timer(1000).subscribe((x) => {
@@ -87,7 +103,6 @@ export class CalendarComponent {
   }
 
   updateCalendar() {
-    console.log('update calendar');
     this.calendarComponent.getApi().refetchEvents();
   }
 }

@@ -4,6 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 import { AxiosService } from '../axios.service';
 import { MatDialog } from '@angular/material/dialog';
+import { SharedCloseService } from '../shared-close.service';
+import { Subscription } from 'rxjs';
+import { afterMain } from '@popperjs/core';
 
 @Component({
   selector: 'app-eventpanel',
@@ -17,21 +20,27 @@ export class EventpanelComponent {
   events: EventData[] = [];
   axiosService: AxiosService = inject(AxiosService);
 
-  constructor() {
-    afterNextRender (() => {
-      this.get();
-    })
+  clickEventsubscription: Subscription;
+
+  constructor(private sharedService: SharedCloseService) {
+    this.clickEventsubscription = this.sharedService
+      .getCloseEvent()
+      .subscribe(() => {
+        this.get();
+      });
+
+        
   }
 
   ngOnInit(){
-   
+    this.get();
   }
-  
-  get(){
-     this.axiosService.request('GET', '/event/all', {}).then((response) => {
-       this.events = response.data;
-       this.filteredEvents = this.events;
-     });
+
+  get() {
+    this.axiosService.request('GET', '/event/all', {}).then((response) => {
+      this.events = response.data;
+      this.filteredEvents = this.events;
+    });
   }
 
   filterResults(text: string) {
@@ -51,7 +60,6 @@ export class EventpanelComponent {
       // data: { name: 'tets' },
       // disableClose: true,
     });
-    
   }
 
   currentEvent: EventData | undefined;
@@ -59,7 +67,7 @@ export class EventpanelComponent {
   edit(event: EventData) {
     console.log(event);
     const modalRef = this.modalService.open(ModalComponent);
-    console.log("1");
+    console.log('1');
     modalRef.componentInstance.editEvent = event;
     console.log('2');
   }
