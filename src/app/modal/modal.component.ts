@@ -17,6 +17,7 @@ import {
 import { SharedCloseService } from '../shared-close.service';
 import { AxiosService } from '../axios.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AxiosResponse } from 'axios';
 
 @Component({
   selector: 'app-modal2',
@@ -85,10 +86,14 @@ export class ModalComponent {
       .request('POST', '/event/add', this.requestBody())
       .catch((e) => {
         console.log(e);
+        this.errors = e.response.data.errors;
+        return e;
       })
       .then((response) => {
-        this.activeModal.close();
-        this.closeService.sendCloseEvent();
+        if (response.status == '200'){
+          this.activeModal.close();
+          this.closeService.sendCloseEvent();
+        }   
       });
   }
 
